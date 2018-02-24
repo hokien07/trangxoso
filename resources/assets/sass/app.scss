@@ -1,0 +1,124 @@
+
+// Fonts
+//@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/*----------------------------------------------------*/
+/*---------------FONT FAMILY--------------------------*/
+/*----------------------------------------------------*/
+p, a, strong, span, table, h1, h2, h3, h4, h5, h6, li  {
+  font-family: 'Roboto', sans-serif;
+}
+
+/*----------------------------------------------------*/
+/*----------------header------------------------------*/
+/*-----------------------------------------------------*/
+
+#top-header {
+  background: #fff;
+  p {
+    text-transform: uppercase;
+    color: #1b1e21;
+    font-weight: 700;
+    font-size: 12px;
+  }
+}
+
+#center-header .container {
+  background: #fff;
+  margin-top: -15px;
+  h1{
+    color: red;
+    padding-left: 3px;
+    font-weight: 600;
+    font-size: 30px;
+    padding-top: 10px;
+  }
+  p {
+    color: black;
+    padding-left: 3px;
+    font-size: 10px;
+    margin-top: -10px;
+    font-weight: 700;
+    padding-bottom: 10px;
+  }
+}
+#menu {
+  background: #ed1c25;
+  margin-top: -15px;
+  a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .dropdown-item {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+  }
+}
+
+/*----------------------------------------------------*/
+/*----------------------Sidebar-----------------------*/
+/*----------------------------------------------------*/
+.block-xoso {
+  .xoso-title {
+    background: #f60;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 0px 10px 5px;
+  }
+  ul {
+    margin-top: -8px;
+
+  }
+}
+
+
+/*-------------------------------------------------------------*/
+/*------------------CONTENT------------------------------------*/
+/*-------------------------------------------------------------*/
+
+#content {
+  border: 1px solid #ccc;
+  margin-left: -10px;
+  margin-right: -10px;
+  .title-box{
+    background-color: #fff2bc;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    padding: 5px 0px;
+  }
+  .check-ngay {
+    margin-top: 10px;
+    p{
+      line-height: 10px;
+      padding-top: 10px;
+      color: red;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  .open-day-gif {
+    margin-top: 10px;
+  }
+}
+
+
