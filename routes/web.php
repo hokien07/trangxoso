@@ -15,4 +15,22 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/getcontent', 'CrawlerController@getUrl');
+Route::get('/crawler', 'CrawlerController@get_data');
+
+/*---------------------------------------------------------*/
+/*-----------------------Check connect database------------*/
+/*---------------------------------------------------------*/
+
+
+Route::get('connect', function () {
+    if (DB::connection()->getDatabaseName()) {
+        echo "conncted sucessfully to database " . DB::connection()->getDatabaseName();
+
+        $tables = DB::select('SHOW TABLES');
+        foreach ($tables as $table) {
+            foreach ($table as $key => $value)
+                echo $value;
+        }
+    }
+});
+
