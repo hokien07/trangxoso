@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/crawler', 'CrawlerController@get_data');
+Route::get('/', 'GetdataController@get_ten_tinh_theo_vung');
+Route::get('/crawler', 'CrawlerController@connect_to_class');
 
 /*---------------------------------------------------------*/
 /*-----------------------Check connect database------------*/

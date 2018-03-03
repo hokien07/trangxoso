@@ -1,5 +1,6 @@
 <div class="col-md-3">
     <div class="block-xoso">
+        {{$ma_vung}}
         <h2 class="xoso-title">XỔ SỐ MIỀN BẮC</h2>
         <ul class="list-group">
             <a href="#" class="list-group-item list-group-item-action "><i class="fa fa-angle-double-right"></i> Cras justo odio</a>
