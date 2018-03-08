@@ -12,8 +12,26 @@
 */
 
 
-Route::get('/', 'GetdataController@get_ten_tinh_theo_vung');
-Route::get('/crawler', 'CrawlerController@connect_to_class');
+/*--------------------------------------------------------*/
+/*---------------get Content-----------------------------*/
+/*--------------------------------------------------------*/
+
+Route::get('/', 'GetdataController@get_ten_tinh');
+
+/*--------------------------------------------------------*/
+/*---------------Crawller data-----------------------------*/
+/*--------------------------------------------------------*/
+
+
+Route::get('/crawler', 'CrawlerController@get_content');
+Route::get('/lay-tin-moi-nhat', 'CrawlerController@get_tin_moi_nhat');
+
+
+
+/*---------------------------------------------------------*/
+/*-----------------------Lay ket qua mien bac------------*/
+/*---------------------------------------------------------*/
+Route::get('lay-ket-qua-mien-bac', 'CrawlerController@Lay_ket_qua_mien_bac');
 
 /*---------------------------------------------------------*/
 /*-----------------------Check connect database------------*/

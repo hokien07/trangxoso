@@ -3,57 +3,14 @@
         <p class="text-center">Thứ sáu - 23/02/2018</p>
     </div>
     <div class="link-ads">
-        <a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a><a href="#">
-            <span>
-                <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
-            </span>
-            <b>Lô cao cấp</b>
-        </a>
+        @foreach($quang_caos  as $quang_cao)
+            <a href="{{$quang_cao->link_quang_cao}}">
+                <span>
+                    <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
+                </span>
+                <b>{{$quang_cao->ten_quang_cao}}</b>
+            </a>
+        @endforeach
     </div>
     {{--end link ads--}}
 

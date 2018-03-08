@@ -122,3 +122,30 @@ p, a, strong, span, table, h1, h2, h3, h4, h5, h6, li  {
 }
 
 
+/*-----------------------------------*/
+/*------------Giai-------------------*/
+/*-----------------------------------*/
+.box {
+  .title-box {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 0px;
+  }
+}
+.giai {
+  text-align: center;
+  .ket-qua {
+    font-weight: 700;
+    font-size: 18px;
+  }
+}
+
+.dac-biet {
+    color: red;
+}
+
+.ten-tinh-mien-nam-mo-thuong {
+  text-transform: uppercase;
+  text-decoration: solid;
+}
