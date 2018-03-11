@@ -23,15 +23,17 @@ Route::get('/', 'GetdataController@get_ten_tinh');
 /*--------------------------------------------------------*/
 
 
-Route::get('/crawler', 'CrawlerController@get_content');
-Route::get('/lay-tin-moi-nhat', 'CrawlerController@get_tin_moi_nhat');
+//Route::get('/crawler', 'CrawlerController@get_content');
+//Route::get('/lay-tin-moi-nhat', 'CrawlerController@get_tin_moi_nhat');
 
 
 
 /*---------------------------------------------------------*/
 /*-----------------------Lay ket qua mien bac------------*/
 /*---------------------------------------------------------*/
-Route::get('lay-ket-qua-mien-bac', 'CrawlerController@Lay_ket_qua_mien_bac');
+Route::get('lay-ket-qua-mien-bac', 'KetquamienbacController@Lay_ket_qua');
+Route::get('lay-ket-qua-tinh', 'KetquatinhController@Lay_ket_qua');
+Route::get('lay-ket-qua-dien-toan', 'KetquadientoanController@dien_toan');
 
 /*---------------------------------------------------------*/
 /*-----------------------Check connect database------------*/

@@ -48,36 +48,36 @@ class GetdataController extends Controller
     public function get_ten_tinh()
     {
         $crawller = new Crawller();
-
-        $ten_tinh = $crawller->get_ten_tinh();
-        $all_tin = $crawller->lay_tat_ca_tin();
-        $thong_ke = $crawller->lay_thong_ke();
-        $quang_caos = $crawller->lay_thong_tin_qung_cao();
-        $ngay_thang = $crawller->lay_ngay_thang();
-
-        $date = $crawller->get_date();
-        $ket_qua_mien_bac = $crawller->lay_ket_qua_theo_ngay_theo_vung('2018-03-04', 0);
-        $ket_qua_mien_nam = $crawller->lay_ket_qua_mien_nam_mo_thuong();
-
-
-        $mien_bac = [];
-        $mien_nam = [];
-        $mien_trung = [];
-        $dien_toan = [];
-
-        foreach ($ten_tinh as $key => $tinh_theo_vung) {
-            if ($tinh_theo_vung->tinh_vung == 0) {
-                array_push($mien_bac, $tinh_theo_vung->ten_tinh);
-            } elseif ($tinh_theo_vung->tinh_vung == 2) {
-                array_push($mien_trung, $tinh_theo_vung->ten_tinh);
-            } elseif ($tinh_theo_vung->tinh_vung == 1) {
-                array_push($mien_nam, $tinh_theo_vung->ten_tinh);
-            } else {
-                array_push($dien_toan, $tinh_theo_vung->ten_tinh);
-            }
-        }
-
-        return view('home', compact('ten_tinh', 'mien_bac', 'mien_trung', 'mien_nam', 'dien_toan', 'all_tin', 'thong_ke', 'quang_caos', 'ngay_thang', 'ket_qua_mien_bac', 'ket_qua_mien_nam'));
+//
+//        $ten_tinh = $crawller->get_ten_tinh();
+//        $all_tin = $crawller->lay_tat_ca_tin();
+//        $thong_ke = $crawller->lay_thong_ke();
+//        $quang_caos = $crawller->lay_thong_tin_qung_cao();
+//        $ngay_thang = $crawller->lay_ngay_thang();
+//
+//        $date = $crawller->get_date();
+//        $ket_qua_mien_bac = $crawller->lay_ket_qua_theo_ngay_theo_vung('2018-03-04', 0);
+//        $ket_qua_mien_nam = $crawller->lay_ket_qua_mien_nam_mo_thuong();
+//
+//
+//        $mien_bac = [];
+//        $mien_nam = [];
+//        $mien_trung = [];
+//        $dien_toan = [];
+//
+//        foreach ($ten_tinh as $key => $tinh_theo_vung) {
+//            if ($tinh_theo_vung->tinh_vung == 0) {
+//                array_push($mien_bac, $tinh_theo_vung->ten_tinh);
+//            } elseif ($tinh_theo_vung->tinh_vung == 2) {
+//                array_push($mien_trung, $tinh_theo_vung->ten_tinh);
+//            } elseif ($tinh_theo_vung->tinh_vung == 1) {
+//                array_push($mien_nam, $tinh_theo_vung->ten_tinh);
+//            } else {
+//                array_push($dien_toan, $tinh_theo_vung->ten_tinh);
+//            }
+//        }
+//
+//        return view('home', compact('ten_tinh', 'mien_bac', 'mien_trung', 'mien_nam', 'dien_toan', 'all_tin', 'thong_ke', 'quang_caos', 'ngay_thang', 'ket_qua_mien_bac', 'ket_qua_mien_nam'));
     }
 
     /**
