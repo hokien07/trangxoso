@@ -10,6 +10,8 @@ class KetquatinhController extends Controller
 {
     public function Lay_ket_qua()
     {
+//        $mo_thuong = $this->tinh_mo_thuong();
+
         $dalat = $this->da_lat();
         $camau = $this->ca_mau();
         $dongthap = $this->dong_thap();
@@ -50,6 +52,15 @@ class KetquatinhController extends Controller
         $dien_toan_636 = $this->dien_toan_636();
         $dien_toan_than_tai = $this->dien_toan_than_tai();
     }
+
+//    public function tinh_mo_thuong(){
+//        $url = 'http://xoso.me/';
+//
+//        if($this->get_data($url, $data)) {
+//            preg_match_all('/<div class="box mo-thuong-ngay"><h2 class="title-bor"><strong>Các tỉnh mở thưởng hôm nay<\/strong><\/h2><table class="colgiai" cellpadding="0" cellspacing="0" border="0" width="100%"><tbody><tr><td>(.+?)<\/td><td>(.+?)<\/td><td>(.+?)<\/td><\/tr><tr><td>(.+?)<\/td><td>(.+>)<\/td><td>(.+?)<\/td><\/tr><tr><td>(.+?)<\/td><td><\/td><td>(.+?)<\/td><\/tr><tr><td><\/td><td><\/td><td>(.+?)<\/td><\/tr><\/tbody><\/table><\/div>/', $data, $match);
+//            var_dump($match);
+//        }
+//    }
 
     public function dien_toan_than_tai () {
         $url = 'http://xoso.me/xo-so-dien-toan-than-tai-hom-nay.html';
