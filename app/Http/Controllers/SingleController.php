@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Controllers\GetdataController as getdata;
+use App\Classes\Crawller;
 
 class SingleController extends Controller
 {
@@ -14,9 +16,11 @@ class SingleController extends Controller
             ->where('tinh_vung', '=', $vung)
             ->get();
 
-        echo "<pre>";
-       var_dump($ket_qua);
+        $get_data = new getdata();
+        $crawler = new Crawller();
+        $ten_tinhs = $get_data->get_ten_tinh();
+        $ngay = $crawler->lay_ngay_thang();
 
-       echo "</pre>";
+        return view('single', compact('ten_tinhs', 'ngay', 'ket_qua'));
     }
 }

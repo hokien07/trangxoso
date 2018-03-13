@@ -12,12 +12,20 @@ class GetdataController extends Controller
     public function index()
     {
         $ten_tinhs = $this->get_ten_tinh();
-//
-//        echo "<pre>";
-//        var_dump($ten_tinhs);
-//        echo "</pre>";
-//        exit();
-        return view('home', compact('ten_tinhs'));
+        $crawl = new Crawller();
+        $ngay = $crawl->lay_ngay_thang();
+        $to_day = $crawl->get_date();
+
+        //lay ket qua mien bac moi nhat.
+
+        $kq = DB::table('ket_qua_mien_nam')
+            ->select('*')
+            ->where('tinh_vung', '=', 0)
+            ->orderBy('id_ket_qua_xo_so', 'ASC')
+            ->first();
+
+
+        return view('home', compact('ten_tinhs', 'ngay', 'kq'));
     }
 
 
