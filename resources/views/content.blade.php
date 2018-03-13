@@ -3,14 +3,12 @@
         <p class="text-center">Thứ sáu - 23/02/2018</p>
     </div>
     <div class="link-ads">
-        @foreach($quang_caos  as $quang_cao)
-            <a href="{{$quang_cao->link_quang_cao}}">
+            <a href="">
                 <span>
                     <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
                 </span>
-                <b>{{$quang_cao->ten_quang_cao}}</b>
+                <b></b>
             </a>
-        @endforeach
     </div>
     {{--end link ads--}}
 
@@ -153,8 +151,4 @@
             </tbody>
         </table>
     </div>
-
-
-
-
 </div>

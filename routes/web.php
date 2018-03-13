@@ -16,7 +16,8 @@
 /*---------------get Content-----------------------------*/
 /*--------------------------------------------------------*/
 
-Route::get('/', 'GetdataController@get_ten_tinh');
+Route::get('/', 'GetdataController@index');
+Route::get('{id}/{vung}/ket-qua', ['as'=>'ket-qua', 'uses'=>'SingleController@get_ket_qua_tung_tinh']);
 
 /*--------------------------------------------------------*/
 /*---------------Crawller data-----------------------------*/
