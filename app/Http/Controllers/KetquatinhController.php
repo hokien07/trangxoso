@@ -45,6 +45,350 @@ class KetquatinhController extends Controller
         $daknong = $this->dak_nong();
         $danang = $this->da_nang();
         $quangngai = $this->quang_ngai();
+        $mienbac = $this->mien_bac();
+        $dien_toan_123 = $this->dien_toan_123();
+        $dien_toan_636 = $this->dien_toan_636();
+        $dien_toan_than_tai = $this->dien_toan_than_tai();
+    }
+
+    public function dien_toan_than_tai () {
+        $url = 'http://xoso.me/xo-so-dien-toan-than-tai-hom-nay.html';
+
+        /*Tinh vung luu y:
+       * Tinh vung = 0: mien bac
+        * Tinh vung = 1 : xo so dien toan
+        * Tinh vung = 2 : Mien trung
+        * Tinh vung = 3 : Mien nam*/
+
+        $tinh_vung = 1;
+        $id_tinh =  39;
+        $ma_tinh = 'thantai';
+
+        preg_match('/xoso.me\/(.+?)-hom-nay.html/', $url, $match);
+        $ten_khong_dau = $match[1];
+
+        $ten_co_dau = '';
+        if ($this->get_data($url, $data)) {
+            preg_match('/Kết quả (.+?) ngày/', $data, $match);
+            $ten_co_dau = $match[1];
+        }
+
+        $ten_tinh = ten_tinh::updateOrCreate(
+            ['id_tinh'=> $id_tinh],
+            ['ten_tinh' => $ten_co_dau, 'mo_thuong' => 0, 'tinh_vung' => $tinh_vung, 'ten_tinh_khong_dau' => $ten_khong_dau, 'ma_tinh'=>$ma_tinh]
+        );
+
+        $mngay = [];
+        if ($this->get_data($url, $data)) {
+            preg_match_all('/<strong>Kết quả xổ số điện toán thần tài ngày (.+?)<\/strong>/', $data, $ngay);
+            foreach ($ngay[1] as $value) {
+                $value = date("Y-m-d", strtotime($value));
+                array_push($mngay, $value);
+            }
+        }
+
+
+        $mgiai = [];
+        if ($this->get_data($url, $data)) {
+            preg_match_all('/<div><span>(\d+)<\/span><\/div>/', $data, $match);
+
+            if($match && $match[1]) {
+                foreach ($match[1] as $giai) {
+                    array_push($mgiai, $giai);
+                }
+            }
+        }
+
+        $mtung_ngay = [];
+        $mtung_ngay_group = [];
+        for ($i = 0; $i < sizeof($mgiai); $i++) {
+            if (array_key_exists($i, $mngay) && array_key_exists($i, $mgiai)) {
+                array_push($mtung_ngay, $mngay[$i], $mgiai[$i]);
+                array_push($mtung_ngay_group, $mtung_ngay);
+                $mtung_ngay = [];
+            }
+        }
+
+        foreach ($mtung_ngay_group as $key => $tung_ngay) {
+            $ket_qua= ket_qua_mien_nam::updateOrCreate(
+                ['ngay_mo_thuong' => $tung_ngay[0], 'id_tinh'=>$id_tinh],
+                ['dac_biet' => $tung_ngay[1], 'giai_nhat' => '', 'giai_nhi' => '', 'giai_ba' => '', 'giai_bon' => '', 'giai_nam' => '', 'giai_sau' => '', 'giai_bay' => '', 'giai_tam' => '', 'tinh_vung' => $tinh_vung]
+            );
+        }
+    }
+
+    public function dien_toan_636() {
+        $url = 'http://xoso.me/kq-xsdt-6-36-ket-qua-xo-so-dien-toan-6-36-truc-tiep-hom-nay.html';
+
+        /*Tinh vung luu y:
+       * Tinh vung = 0: mien bac
+        * Tinh vung = 1 : xo so dien toan
+        * Tinh vung = 2 : Mien trung
+        * Tinh vung = 3 : Mien nam*/
+
+        $tinh_vung = 1;
+        $id_tinh =  38;
+        $ma_tinh = '6x36';
+
+        preg_match('/kq-xsdt-6-36-ket-qua-(.+?)-truc-tiep-hom-nay.html/', $url, $match);
+        $ten_khong_dau = $match[1];
+
+        $ten_co_dau = '';
+        if ($this->get_data($url, $data)) {
+            preg_match('/Kết quả (.+?) ngày/', $data, $match);
+            $ten_co_dau = $match[1];
+        }
+
+        $ten_tinh = ten_tinh::updateOrCreate(
+            ['id_tinh'=> $id_tinh],
+            ['ten_tinh' => $ten_co_dau, 'mo_thuong' => 0, 'tinh_vung' => $tinh_vung, 'ten_tinh_khong_dau' => $ten_khong_dau, 'ma_tinh'=>$ma_tinh]
+        );
+
+        $mngay = [];
+        if ($this->get_data($url, $data)) {
+            preg_match_all('/<strong>Kết quả xổ số điện toán 6x36 ngày (.+?)<\/strong>/', $data, $ngay);
+            foreach ($ngay[1] as $value) {
+                $value = date("Y-m-d", strtotime($value));
+                array_push($mngay, $value);
+            }
+        }
+
+
+        $mgiai = [];
+        if ($this->get_data($url, $data)) {
+            preg_match_all('/iv><span>(\d+)<\/span><span>(\d+)<\/span><span>(\d+)<\/span>/', $data, $match);
+
+            if($match && $match[1] && $match[2] && $match[3]) {
+                for ($loop = 0; $loop < sizeof($match[1]); $loop++) {
+                    if (array_key_exists($loop, $match[1]) && array_key_exists($loop, $match[2]) && array_key_exists($loop, $match[3])) {
+                        $tung_giai = $match[1][$loop] . ',' . $match[2][$loop] . ',' . $match[3][$loop];
+                        array_push($mgiai, $tung_giai);
+                    }
+                }
+
+            }
+        }
+
+        $mtung_ngay = [];
+        $mtung_ngay_group = [];
+        for ($i = 0; $i < sizeof($mgiai); $i++) {
+            if (array_key_exists($i, $mngay) && array_key_exists($i, $mgiai)) {
+                array_push($mtung_ngay, $mngay[$i], $mgiai[$i]);
+                array_push($mtung_ngay_group, $mtung_ngay);
+                $mtung_ngay = [];
+            }
+        }
+
+        foreach ($mtung_ngay_group as $key => $tung_ngay) {
+            $ket_qua= ket_qua_mien_nam::updateOrCreate(
+                ['ngay_mo_thuong' => $tung_ngay[0], 'id_tinh'=>$id_tinh],
+                ['dac_biet' => $tung_ngay[1], 'giai_nhat' => '', 'giai_nhi' => '', 'giai_ba' => '', 'giai_bon' => '', 'giai_nam' => '', 'giai_sau' => '', 'giai_bay' => '', 'giai_tam' => '', 'tinh_vung' => $tinh_vung]
+            );
+        }
+
+    }
+
+    public function dien_toan_123 () {
+        $url = 'http://xoso.me/kq-xsdt-123-ket-qua-xo-so-dien-toan-123-truc-tiep-hom-nay.html';
+
+        /*Tinh vung luu y:
+       * Tinh vung = 0: mien bac
+        * Tinh vung = 1 : xo so dien toan
+        * Tinh vung = 2 : Mien trung
+        * Tinh vung = 3 : Mien nam*/
+
+        $tinh_vung = 1;
+        $id_tinh =  37;
+        $ma_tinh = '';
+
+        preg_match('/kq-xsdt-123-ket-qua-(.+?)-truc-tiep/', $url, $match);
+        $ten_khong_dau = $match[1];
+
+        $ten_co_dau = '';
+        if ($this->get_data($url, $data)) {
+            preg_match('/Kết quả (.+?) ngày/', $data, $match);
+            $ten_co_dau = $match[1];
+        }
+
+        $ten_tinh = ten_tinh::updateOrCreate(
+            ['id_tinh'=> $id_tinh],
+            ['ten_tinh' => $ten_co_dau, 'mo_thuong' => 0, 'tinh_vung' => $tinh_vung, 'ten_tinh_khong_dau' => $ten_khong_dau, 'ma_tinh'=>$ma_tinh]
+        );
+
+        $mngay = [];
+        if ($this->get_data($url, $data)) {
+            preg_match_all('/<strong>Kết quả xổ số điện toán 123 ngày (.+?)<\/strong>/', $data, $ngay);
+            foreach ($ngay[1] as $value) {
+                $value = date("Y-m-d", strtotime($value));
+                array_push($mngay, $value);
+            }
+        }
+
+
+        $mgiai = [];
+        if ($this->get_data($url, $data)) {
+            preg_match_all('/<div><span>(\d+)<\/span><span>(\d+)<\/span><span>(\d+)<\/span><\/div>/', $data, $match);
+
+            if($match && $match[1] && $match[2] && $match[3]) {
+                for ($loop = 0; $loop < sizeof($match[1]); $loop++) {
+                    if (array_key_exists($loop, $match[1]) && array_key_exists($loop, $match[2]) && array_key_exists($loop, $match[3])) {
+                        $tung_giai = $match[1][$loop] . ',' . $match[2][$loop] . ',' . $match[3][$loop];
+                        array_push($mgiai, $tung_giai);
+                    }
+                }
+
+            }
+        }
+
+        $mtung_ngay = [];
+        $mtung_ngay_group = [];
+        for ($i = 0; $i < sizeof($mgiai); $i++) {
+            if (array_key_exists($i, $mngay) && array_key_exists($i, $mgiai)) {
+                array_push($mtung_ngay, $mngay[$i], $mgiai[$i]);
+                array_push($mtung_ngay_group, $mtung_ngay);
+                $mtung_ngay = [];
+            }
+        }
+
+        foreach ($mtung_ngay_group as $key => $tung_ngay) {
+
+            $ket_qua= ket_qua_mien_nam::updateOrCreate(
+                ['ngay_mo_thuong' => $tung_ngay[0], 'id_tinh'=>$id_tinh],
+                ['dac_biet' => $tung_ngay[1], 'giai_nhat' => '', 'giai_nhi' => '', 'giai_ba' => '', 'giai_bon' => '', 'giai_nam' => '', 'giai_sau' => '', 'giai_bay' => '', 'giai_tam' => '', 'tinh_vung' => $tinh_vung]
+            );
+
+        }
+    }
+
+    public function mien_bac() {
+        $url = 'http://xoso.me/kqxsmb-xstd-ket-qua-xo-so-mien-bac.html';
+        $tinh_vung = 0;
+        $id_tinh = 1;
+        $ten_khong_dau = 'xo-so-mien-bac';
+        $ten_co_dau = 'Xổ số miền bắc';
+        $ma_tinh = 'MB';
+
+
+        $ten_tinh = ten_tinh::updateOrCreate(
+            ['id_tinh'=> $id_tinh],
+            ['ten_tinh' => $ten_co_dau, 'mo_thuong' => 0, 'tinh_vung' => $tinh_vung, 'ten_tinh_khong_dau' => $ten_khong_dau, 'ma_tinh'=>$ma_tinh]
+        );
+
+
+        if ($this->get_data($url, $data)) {
+
+            preg_match_all('#title="Xổ số miền Bắc ngày (.+?)">Xổ số miền Bắc ngày#', $data, $ngay);
+            $mngay = [];
+            foreach ($ngay[1] as $value) {
+                $value = date("Y-m-d", strtotime($value));
+                array_push($mngay, $value);
+            }
+
+            preg_match_all('#<td class="txt-giai">Đặc biệt</td><td colspan="12" class="number"><b>(.+?)</b></td>#', $data, $db);
+            $mdb = [];
+            foreach ($db[1] as $value) {
+                array_push($mdb, $value);
+            }
+
+            $mgiainhat = [];
+            preg_match_all('#<td class="txt-giai">Giải nhất</td><td colspan="12" class="number"><b>(.+?)</b></td>#', $data, $gn);
+            foreach ($gn[1] as $value) {
+                array_push($mgiainhat, $value);
+            }
+
+            $mgiainhi = [];
+            preg_match_all('/<tr><td class="txt-giai">Giải nhì<\/td><td colspan="6" class="number"><b>(\d+)<\/b><\/td><td colspan="6" class="number"><b class="">(\d+)<\/b><\/td><\/tr>/', $data, $giai_nhi_tt);
+
+            if ($giai_nhi_tt && $giai_nhi_tt[1] && $giai_nhi_tt[2]) {
+                for ($loop = 0; $loop < sizeof($giai_nhi_tt[1]); $loop++) {
+                    if (array_key_exists($loop, $giai_nhi_tt[1]) && array_key_exists($loop, $giai_nhi_tt[2])) {
+                        $tung_giai = $giai_nhi_tt[1][$loop] . ',' . $giai_nhi_tt[2][$loop];
+                        array_push($mgiainhi, $tung_giai);
+                    }
+                }
+            }
+
+            preg_match_all('/<tr class="giai3 bg_ef"><td class="txt-giai" rowspan="2">Giải ba<\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><td class="number" colspan="4"><b class="">(\d+)<\/b><\/td><td class="number" colspan="4"><b class="">(\d+)<\/b><\/td><\/tr><tr class="bg_ef"><td class="number" colspan="4"><b>(\d+)<\/b><\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><\/tr>/', $data, $giai_ba);
+            $mgiaiba = [];
+            if ($giai_ba && $giai_ba[1] && $giai_ba[2] && $giai_ba[3] && $giai_ba[4] && $giai_ba[5] && $giai_ba[6]) {
+                for ($loop = 0; $loop < sizeof($giai_ba[1]); $loop++) {
+                    if (array_key_exists($loop, $giai_ba[1]) && array_key_exists($loop, $giai_ba[2]) && array_key_exists($loop, $giai_ba[3]) && array_key_exists($loop, $giai_ba[4]) && array_key_exists($loop, $giai_ba[5]) && array_key_exists($loop, $giai_ba[6])) {
+                        $tung_giai = $giai_ba[1][$loop] . ',' . $giai_ba[2][$loop] . ',' . $giai_ba[3][$loop] . ',' . $giai_ba[4][$loop] . ',' . $giai_ba[5][$loop] . ',' . $giai_ba[6][$loop];
+                        array_push($mgiaiba, $tung_giai);
+                    }
+                }
+            }
+
+
+            $mgiaitu = [];
+            preg_match_all('/<tr><td class="txt-giai">Giải tư<\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><\/tr>/', $data, $giai_tu);
+
+            if ($giai_tu && $giai_tu[1] && $giai_tu[2] && $giai_tu[3] && $giai_tu[4]) {
+                for ($loop = 0; $loop < sizeof($giai_tu[1]); $loop++) {
+                    if (array_key_exists($loop, $giai_tu[1]) && array_key_exists($loop, $giai_tu[2]) && array_key_exists($loop, $giai_tu[3]) && array_key_exists($loop, $giai_tu[4])) {
+                        $tung_giai = $giai_tu[1][$loop] . ',' . $giai_tu[2][$loop] . ',' . $giai_tu[3][$loop] . ',' . $giai_tu[4][$loop];
+                        array_push($mgiaitu, $tung_giai);
+                    }
+                }
+            }
+
+            preg_match_all('/<tr class="giai5 bg_ef"><td class="txt-giai" rowspan="2">Giải năm<\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><\/tr><tr class="bg_ef"><td class="number" colspan="4"><b>(\d+)<\/b><\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><td class="number" colspan="4"><b>(\d+)<\/b><\/td><\/tr>/', $data, $giai_nam);
+            $mgiainam = [];
+            if ($giai_nam && $giai_nam[1] && $giai_nam[2] && $giai_nam[3] && $giai_nam[4] && $giai_nam[5] && $giai_nam[6]) {
+                for ($loop = 0; $loop < sizeof($giai_nam[1]); $loop++) {
+                    if (array_key_exists($loop, $giai_nam[1]) && array_key_exists($loop, $giai_nam[2]) && array_key_exists($loop, $giai_nam[3]) && array_key_exists($loop, $giai_nam[4]) && array_key_exists($loop, $giai_nam[5]) && array_key_exists($loop, $giai_nam[6])) {
+                        $tung_giai = $giai_nam[1][$loop] . ',' . $giai_nam[2][$loop] . ',' . $giai_nam[3][$loop] . ',' . $giai_nam[4][$loop] . ',' . $giai_nam[5][$loop] . ',' . $giai_nam[6][$loop];
+                        array_push($mgiainam, $tung_giai);
+                    }
+                }
+            }
+
+            $mgiaisau = [];
+            preg_match_all('/<tr><td class="txt-giai">Giải tư<\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><\/tr>/', $data, $giai_sau);
+
+            if ($giai_sau && $giai_sau[1] && $giai_sau[2] && $giai_sau[3]) {
+                for ($loop = 0; $loop < sizeof($giai_sau[1]); $loop++) {
+                    if (array_key_exists($loop, $giai_sau[1]) && array_key_exists($loop, $giai_sau[2]) && array_key_exists($loop, $giai_sau[3])) {
+                        $tung_giai = $giai_sau[1][$loop] . ',' . $giai_sau[2][$loop] . ',' . $giai_sau[3][$loop];
+                        array_push($mgiaisau, $tung_giai);
+                    }
+                }
+            }
+
+            $mgiaibay = [];
+            preg_match_all('/<tr class="bg_ef"><td class="txt-giai">Giải bảy<\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><td colspan="3" class="number"><b>(\d+)<\/b><\/td><\/tr>/', $data, $giai_bay);
+
+            if ($giai_bay && $giai_bay[1] && $giai_bay[2] && $giai_bay[3] && $giai_bay[4]) {
+                for ($loop = 0; $loop < sizeof($giai_bay[1]); $loop++) {
+                    if (array_key_exists($loop, $giai_bay[1]) && array_key_exists($loop, $giai_bay[2]) && array_key_exists($loop, $giai_bay[3]) && array_key_exists($loop, $giai_bay[4])) {
+                        $tung_giai = $giai_bay[1][$loop] . ',' . $giai_bay[2][$loop] . ',' . $giai_bay[3][$loop] . ',' . $giai_bay[4][$loop];
+                        array_push($mgiaibay, $tung_giai);
+                    }
+                }
+            }
+
+            /*tong het tung ngay theo thu tu*/
+
+            $mtung_ngay = [];
+            $mtung_ngay_group = [];
+            for ($i = 0; $i < sizeof($giai_ba); $i++) {
+                if (array_key_exists($i, $mngay) && array_key_exists($i, $mdb) && array_key_exists($i, $mgiainhat) && array_key_exists($i, $mgiainhi) && array_key_exists($i, $mgiaitu) && array_key_exists($i, $mgiainam) && array_key_exists($i, $mgiaisau) && array_key_exists($i, $mgiaibay)) {
+                    array_push($mtung_ngay, $mngay[$i], $mdb[$i], $mgiainhat[$i], $mgiainhi[$i], $mgiaiba[$i], $mgiaitu[$i], $mgiainam[$i], $mgiaisau[$i], $mgiaibay[$i]);
+                    array_push($mtung_ngay_group, $mtung_ngay);
+                    $mtung_ngay = [];
+                }
+            }
+
+            foreach ($mtung_ngay_group as $key => $tung_ngay) {
+                $ket_qua= ket_qua_mien_nam::updateOrCreate(
+                    ['ngay_mo_thuong' => $tung_ngay[0], 'id_tinh'=>$id_tinh],
+                    ['dac_biet' => $tung_ngay[1], 'giai_nhat' => $tung_ngay[2], 'giai_nhi' => $tung_ngay[3], 'giai_ba' => $tung_ngay[4], 'giai_bon' => $tung_ngay[5], 'giai_nam' => $tung_ngay[6], 'giai_sau' => $tung_ngay[7], 'giai_bay' => $tung_ngay[8], 'giai_tam' => '', 'tinh_vung' => $tinh_vung]
+                );
+            }
+
+        } else {
+            echo "khong the ket noi toi url: " . $url;
+        }
     }
 
     public function da_nang() {
