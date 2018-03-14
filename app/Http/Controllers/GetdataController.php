@@ -24,8 +24,71 @@ class GetdataController extends Controller
             ->orderBy('id_ket_qua_xo_so', 'ASC')
             ->first();
 
+    
+            // lay ket qua mien nam moi nhat.
+        $mien_nam_first = DB::table('ket_qua_mien_nam')
+            ->join('ten_tinh', 'ten_tinh.id_tinh', '=', 'ket_qua_mien_nam.id_tinh')
+            ->where('ket_qua_mien_nam.id_tinh', '=', 10)
+            ->orderBy('id_ket_qua_xo_so', 'ASC')
+            ->select('ket_qua_mien_nam.*', 'ten_tinh.ten_tinh')
+            ->first();
 
-        return view('home', compact('ten_tinhs', 'ngay', 'kq'));
+
+            // lay ket qua mien nam moi nhat.
+            $mien_nam_second = DB::table('ket_qua_mien_nam')
+            ->join('ten_tinh', 'ten_tinh.id_tinh', '=', 'ket_qua_mien_nam.id_tinh')
+            ->where('ket_qua_mien_nam.id_tinh', '=', 12)
+            ->orderBy('id_ket_qua_xo_so', 'ASC')
+            ->select('ket_qua_mien_nam.*', 'ten_tinh.ten_tinh')
+            ->first();
+
+            // lay ket qua mien nam moi nhat.
+            $mien_nam_there = DB::table('ket_qua_mien_nam')
+            ->join('ten_tinh', 'ten_tinh.id_tinh', '=', 'ket_qua_mien_nam.id_tinh')
+            ->where('ket_qua_mien_nam.id_tinh', '=', 8)
+            ->orderBy('id_ket_qua_xo_so', 'ASC')
+            ->select('ket_qua_mien_nam.*', 'ten_tinh.ten_tinh')
+            ->first();
+
+
+
+             // lay ket qua mien nam moi nhat.
+             $mien_nam_there = DB::table('ket_qua_mien_nam')
+             ->join('ten_tinh', 'ten_tinh.id_tinh', '=', 'ket_qua_mien_nam.id_tinh')
+             ->where('ket_qua_mien_nam.id_tinh', '=', 8)
+             ->orderBy('id_ket_qua_xo_so', 'ASC')
+             ->select('ket_qua_mien_nam.*', 'ten_tinh.ten_tinh')
+             ->first();
+
+              // lay ket qua mien trung moi nhat.
+            $mien_trung_first = DB::table('ket_qua_mien_nam')
+            ->join('ten_tinh', 'ten_tinh.id_tinh', '=', 'ket_qua_mien_nam.id_tinh')
+            ->where('ket_qua_mien_nam.id_tinh', '=', 29)
+            ->orderBy('id_ket_qua_xo_so', 'ASC')
+            ->select('ket_qua_mien_nam.*', 'ten_tinh.ten_tinh')
+            ->first();
+
+              // lay ket qua mien trung moi nhat.
+              $mien_trung_second = DB::table('ket_qua_mien_nam')
+              ->join('ten_tinh', 'ten_tinh.id_tinh', '=', 'ket_qua_mien_nam.id_tinh')
+              ->where('ket_qua_mien_nam.id_tinh', '=', 28)
+              ->orderBy('id_ket_qua_xo_so', 'ASC')
+              ->select('ket_qua_mien_nam.*', 'ten_tinh.ten_tinh')
+              ->first();
+
+                // lay ket qua mien trung moi nhat.
+            $mien_trung_there = DB::table('ket_qua_mien_nam')
+            ->join('ten_tinh', 'ten_tinh.id_tinh', '=', 'ket_qua_mien_nam.id_tinh')
+            ->where('ket_qua_mien_nam.id_tinh', '=', 31)
+            ->orderBy('id_ket_qua_xo_so', 'ASC')
+            ->select('ket_qua_mien_nam.*', 'ten_tinh.ten_tinh')
+            ->first();
+
+
+            $tin_moi  = $this->get_news();
+
+
+        return view('home', compact('ten_tinhs', 'ngay', 'kq', 'mien_nam_first', 'mien_nam_second', 'mien_nam_there', 'mien_trung_first', 'mien_trung_second', 'mien_trung_there', 'tin_moi'));
     }
 
 
@@ -85,5 +148,16 @@ class GetdataController extends Controller
 
 
         return $tinh_theo_vung;
+    }
+
+    public function get_news () {
+        //lay tin tuc.
+        $tin_moi = DB::table('tin_tuc')
+        ->select('*')
+        ->orderBy('id_tin', 'ASC')
+        ->take(5)
+        ->get();
+
+        return $tin_moi;
     }
 }

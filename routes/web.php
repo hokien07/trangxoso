@@ -18,14 +18,15 @@
 
 Route::get('/', 'GetdataController@index');
 Route::get('{id}/{vung}/ket-qua', ['as'=>'ket-qua', 'uses'=>'SingleController@get_ket_qua_tung_tinh']);
-
+Route::get('{id}/xem-tin', ['as'=>'xem-tin', 'uses'=>'TintucController@xem_tin']);
+Route::get('/tin-tuc', 'TintucController@get_all_tin_tuc');
 /*--------------------------------------------------------*/
 /*---------------Crawller data-----------------------------*/
 /*--------------------------------------------------------*/
 
 
-//Route::get('/crawler', 'CrawlerController@get_content');
-//Route::get('/lay-tin-moi-nhat', 'CrawlerController@get_tin_moi_nhat');
+Route::get('/lay-tin', 'TintucController@get_tin_tuc');
+Route::get('/tin-tuc', 'TintucController@get_all_tin_tuc');
 
 
 
@@ -35,6 +36,8 @@ Route::get('{id}/{vung}/ket-qua', ['as'=>'ket-qua', 'uses'=>'SingleController@ge
 Route::get('lay-ket-qua-mien-bac', 'KetquamienbacController@Lay_ket_qua');
 Route::get('lay-ket-qua-tinh', 'KetquatinhController@Lay_ket_qua');
 Route::get('lay-ket-qua-dien-toan', 'KetquadientoanController@dien_toan');
+Route::get('lay-tinh-mo-thuong', 'TinhmothuongController@get_tinh_mo_thuong');
+
 
 /*---------------------------------------------------------*/
 /*-----------------------Check connect database------------*/

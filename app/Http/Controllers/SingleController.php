@@ -20,7 +20,8 @@ class SingleController extends Controller
         $crawler = new Crawller();
         $ten_tinhs = $get_data->get_ten_tinh();
         $ngay = $crawler->lay_ngay_thang();
+        $tin_moi = $get_data->get_news();
 
-        return view('single', compact('ten_tinhs', 'ngay', 'ket_qua'));
+        return view('single', compact('ten_tinhs', 'ngay', 'ket_qua', 'tin_moi'));
     }
 }

@@ -339,30 +339,14 @@
     <div class="block-xoso">
         <h2 class="xoso-title">TIN MỚI NHẤT</h2>
         <ul class="list-group">
+            @foreach ($tin_moi as $tin)
             <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                <a href="{{route('xem-tin', $tin->id_tin)}}">
+                    <img src="{{$tin->link_hinh_anh}}" alt="" class="rounded float-left" width="60px" height="60px">
+                </a>
+                <p>{{$tin->tin_tieu_de}}</p>
             </li>
-            <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li>
-            <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li>
-            <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li>
-            <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li>
-            <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li>
+            @endforeach
         </ul>
     </div>
 

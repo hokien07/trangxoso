@@ -51,38 +51,36 @@
             <p class="text-center">{{$ngay}}</p>
         </div>
         <div class="link-ads">
-            <a href="">
+            <a href="#">
                 <span>
                     <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
                 </span>
-                <b></b>
+                <b>Lô tô cao cấp</b>
+            </a>
+
+            <a href="#">
+                <span>
+                    <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
+                </span>
+                <b>Soi cầu miền bắc</b>
+            </a>
+
+            <a href="#">
+                <span>
+                    <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
+                </span>
+                <b>Độc thủ lô</b>
+            </a>
+
+            <a href="#">
+                <span>
+                    <img src="{{asset('images/hot.gif')}}" alt="soi cau chuan">
+                </span>
+                <b>Soi cầu chuẩn</b>
             </a>
         </div>
         {{--end link ads--}}
 
-        <div class="box open-day-gif">
-            <h2 class="title-box">Các tỉnh mở thưởng hôm nay</h2>
-            <table class="table">
-                <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        {{--end open-day-gif--}}
 
         <div class="box">
             <h2 class="title-box">Xổ số miền Bắc  ngày: {{ date("d-m-Y", strtotime($kq->ngay_mo_thuong))}}</h2>
@@ -176,111 +174,295 @@
 
                 </tbody>
             </table>
+            <div class="control-panel">
+                <form action="">
+                    <label class="radio" data-value="0">
+                        <input type="radio" name="show-digits" value="0">
+                    </label>
+                    
+                    <label class="radio" data-value="2">
+                        <input type="radio" name="show-digits" value="2">
+                    </label>
+
+                    <label class="radio" data-value="3">
+                        <input type="radio" name="show-digits" value="3">
+                    </label>
+                </form>
+            </div>
         </div>
 
 
         <div class="box">
-            <h2 class="title-box">XSMN » XSMN thứ 6 » XSMN 23-02-2018 - Xổ số miền Nam</h2>
-            <table class="table">
+            <h2 class="title-box">xổ số miền nam ngày: {{ date("d-m-Y", strtotime($mien_nam_first->ngay_mo_thuong))}}</h2>
+            
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th scope="col" class="tinh-mien-nam-mo-thuong">{{$mien_nam_first->ten_tinh}} <br/> {{$mien_nam_first->ngay_mo_thuong}}</th>
+                        <th scope="col" class="tinh-mien-nam-mo-thuong">{{$mien_nam_second->ten_tinh}} <br/> {{$mien_nam_second->ngay_mo_thuong}}</th>
+                        <th scope="col" class="tinh-mien-nam-mo-thuong">{{$mien_nam_there->ten_tinh}} <br/> {{$mien_nam_there->ngay_mo_thuong}}</th>
+                    </tr>
+                </thead>
                 <tbody>
                 <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td class="txt-giai">G8</td>
+                    <td class="number">{{$mien_nam_first->giai_tam}}</td>
+                    <td class="number">{{$mien_nam_second->giai_tam}}</td>
+                    <td class="number">{{$mien_nam_there->giai_tam}}</td>
                 </tr>
                 <tr>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
+                    <td class="txt-giai">G7</td>
+                    <td class="number">{{$mien_nam_first->giai_bay}}</td>
+                    <td class="number">{{$mien_nam_second->giai_bay}}</td>
+                    <td class="number">{{$mien_nam_there->giai_bay}}</td>
                 </tr>
                 <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                        <td class="txt-giai">G6</td>
+                        <td class="number">
+                            @if($mien_nam_first->giai_sau != '')
+                                @foreach(explode(',', $mien_nam_first->giai_sau) as $giai_sau)
+                                    {{ $giai_sau}} <br/>
+                                @endforeach
+                            @endif
+                        </td>
+                        <td class="number">
+                            @if($mien_nam_second->giai_sau != '')
+                                @foreach(explode(',', $mien_nam_second->giai_sau) as $giai_sau)
+                                    {{ $giai_sau}} <br/>
+                                @endforeach
+                            @endif</td>
+                        <td class="number">
+                            @if($mien_nam_there->giai_sau != '')
+                                @foreach(explode(',', $mien_nam_there->giai_sau) as $giai_sau)
+                                    {{ $giai_sau}} <br/>
+                                @endforeach
+                            @endif</td>
+                </tr> 
+                <tr>
+                        <td class="txt-giai">G5</td>
+                        <td class="number">{{$mien_nam_first->giai_nam}}</td>
+                        <td class="number">{{$mien_nam_second->giai_nam}}</td>
+                        <td class="number">{{$mien_nam_there->giai_nam}}</td>
+                    </tr>
+
+                    <tr>
+                            <td class="txt-giai">G4</td>
+                            <td class="number">
+                                @if($mien_nam_first->giai_bon != '')
+                                    @foreach(explode(',', $mien_nam_first->giai_bon) as $giai_bon)
+                                        {{ $giai_bon}} <br/>
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td class="number">
+                                    @if($mien_nam_second->giai_bon != '')
+                                    @foreach(explode(',', $mien_nam_first->giai_bon) as $giai_bon)
+                                        {{ $giai_bon}} <br/>
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td class="number">
+                                    @if($mien_nam_there->giai_bon != '')
+                                    @foreach(explode(',', $mien_nam_first->giai_bon) as $giai_bon)
+                                        {{ $giai_bon}} <br/>
+                                    @endforeach
+                                @endif
+                            </td>
+                </tr> 
+                
+                <tr>
+                        <td class="txt-giai">G3</td>
+                        <td class="number">
+                            @if($mien_nam_first->giai_ba != '')
+                                @foreach(explode(',', $mien_nam_first->giai_ba) as $giai_ba)
+                                    {{ $giai_ba}} <br/>
+                                @endforeach
+                            @endif
+                        </td>
+                        <td class="number">
+                                @if($mien_nam_second->giai_ba != '')
+                                @foreach(explode(',', $mien_nam_first->giai_ba) as $giai_ba)
+                                    {{ $giai_ba}} <br/>
+                                @endforeach
+                            @endif
+                        </td>
+                        <td class="number">
+                                @if($mien_nam_there->giai_ba != '')
+                                @foreach(explode(',', $mien_nam_first->giai_ba) as $giai_ba)
+                                    {{ $giai_ba}} <br/>
+                                @endforeach
+                            @endif
+                        </td>
+                </tr> 
+                
+                <tr>
+                        <td class="txt-giai">G2</td>
+                        <td class="number">{{$mien_nam_first->giai_nhi}}</td>
+                        <td class="number">{{$mien_nam_second->giai_nhi}}</td>
+                        <td class="number">{{$mien_nam_there->giai_nhi}}</td>
+                </tr>
+
+                <tr>
+                        <td class="txt-giai">G1</td>
+                        <td class="number">{{$mien_nam_first->giai_nhat}}</td>
+                        <td class="number">{{$mien_nam_second->giai_nhat}}</td>
+                        <td class="number">{{$mien_nam_there->giai_nhat}}</td>
+                </tr>
+
+                <tr>
+                        <td class="txt-giai dac-biet">ĐB</td>
+                        <td class="number dac-biet">{{$mien_nam_first->dac_biet}}</td>
+                        <td class="number dac-biet">{{$mien_nam_second->dac_biet}}</td>
+                        <td class="number dac-biet">{{$mien_nam_there->dac_biet}}</td>
                 </tr>
                 </tbody>
             </table>
-        </div> <div class="box">
-            <h2 class="title-box">XSMT » XSMT thứ 6 » XSMT 23-02-2018 - Xổ số miền Trung</h2>
-            <table class="table">
-                <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr> <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
+        </div>
+
+
+        <div class="box">
+                <h2 class="title-box">xổ số miền trung ngày: {{ date("d-m-Y", strtotime($mien_trung_first->ngay_mo_thuong))}}</h2>
+                <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th scope="col" class="tinh-mien-nam-mo-thuong">{{$mien_trung_first->ten_tinh}} <br/> {{$mien_trung_first->ngay_mo_thuong}}</th>
+                                <th scope="col" class="tinh-mien-nam-mo-thuong">{{$mien_trung_second->ten_tinh}} <br/> {{$mien_trung_second->ngay_mo_thuong}}</th>
+                                <th scope="col" class="tinh-mien-nam-mo-thuong">{{$mien_trung_there->ten_tinh}} <br/> {{$mien_trung_there->ngay_mo_thuong}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="txt-giai">G8</td>
+                            <td class="number">{{$mien_trung_first->giai_tam}}</td>
+                            <td class="number">{{$mien_trung_second->giai_tam}}</td>
+                            <td class="number">{{$mien_trung_there->giai_tam}}</td>
+                        </tr>
+                        <tr>
+                            <td class="txt-giai">G7</td>
+                            <td class="number">{{$mien_trung_first->giai_bay}}</td>
+                            <td class="number">{{$mien_trung_second->giai_bay}}</td>
+                            <td class="number">{{$mien_trung_there->giai_bay}}</td>
+                        </tr>
+                        <tr>
+                                <td class="txt-giai">G6</td>
+                                <td class="number">
+                                    @if($mien_trung_first->giai_sau != '')
+                                        @foreach(explode(',', $mien_trung_first->giai_sau) as $giai_sau)
+                                            {{ $giai_sau}} <br/>
+                                        @endforeach
+                                    @endif
+                                </td>
+                                <td class="number">
+                                    @if($mien_trung_second->giai_sau != '')
+                                        @foreach(explode(',', $mien_trung_second->giai_sau) as $giai_sau)
+                                            {{ $giai_sau}} <br/>
+                                        @endforeach
+                                    @endif</td>
+                                <td class="number">
+                                    @if($mien_trung_there->giai_sau != '')
+                                        @foreach(explode(',', $mien_trung_there->giai_sau) as $giai_sau)
+                                            {{ $giai_sau}} <br/>
+                                        @endforeach
+                                    @endif</td>
+                        </tr> 
+                        <tr>
+                                <td class="txt-giai">G5</td>
+                                <td class="number">{{$mien_trung_first->giai_nam}}</td>
+                                <td class="number">{{$mien_trung_second->giai_nam}}</td>
+                                <td class="number">{{$mien_trung_there->giai_nam}}</td>
+                            </tr>
+        
+                            <tr>
+                                    <td class="txt-giai">G4</td>
+                                    <td class="number">
+                                        @if($mien_trung_first->giai_bon != '')
+                                            @foreach(explode(',', $mien_trung_first->giai_bon) as $giai_bon)
+                                                {{ $giai_bon}} <br/>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td class="number">
+                                            @if($mien_trung_second->giai_bon != '')
+                                            @foreach(explode(',', $mien_trung_first->giai_bon) as $giai_bon)
+                                                {{ $giai_bon}} <br/>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td class="number">
+                                            @if($mien_trung_there->giai_bon != '')
+                                            @foreach(explode(',', $mien_trung_first->giai_bon) as $giai_bon)
+                                                {{ $giai_bon}} <br/>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                        </tr> 
+                        
+                        <tr>
+                                <td class="txt-giai">G3</td>
+                                <td class="number">
+                                    @if($mien_trung_first->giai_ba != '')
+                                        @foreach(explode(',', $mien_trung_first->giai_ba) as $giai_ba)
+                                            {{ $giai_ba}} <br/>
+                                        @endforeach
+                                    @endif
+                                </td>
+                                <td class="number">
+                                        @if($mien_trung_second->giai_ba != '')
+                                        @foreach(explode(',', $mien_trung_first->giai_ba) as $giai_ba)
+                                            {{ $giai_ba}} <br/>
+                                        @endforeach
+                                    @endif
+                                </td>
+                                <td class="number">
+                                        @if($mien_trung_there->giai_ba != '')
+                                        @foreach(explode(',', $mien_trung_first->giai_ba) as $giai_ba)
+                                            {{ $giai_ba}} <br/>
+                                        @endforeach
+                                    @endif
+                                </td>
+                        </tr> 
+                        
+                        <tr>
+                                <td class="txt-giai">G2</td>
+                                <td class="number">{{$mien_trung_first->giai_nhi}}</td>
+                                <td class="number">{{$mien_trung_second->giai_nhi}}</td>
+                                <td class="number">{{$mien_trung_there->giai_nhi}}</td>
+                        </tr>
+        
+                        <tr>
+                                <td class="txt-giai">G1</td>
+                                <td class="number">{{$mien_trung_first->giai_nhat}}</td>
+                                <td class="number">{{$mien_trung_second->giai_nhat}}</td>
+                                <td class="number">{{$mien_trung_there->giai_nhat}}</td>
+                        </tr>
+        
+                        <tr>
+                                <td class="txt-giai dac-biet">ĐB</td>
+                                <td class="number dac-biet">{{$mien_trung_first->dac_biet}}</td>
+                                <td class="number dac-biet">{{$mien_trung_second->dac_biet}}</td>
+                                <td class="number dac-biet">{{$mien_trung_there->dac_biet}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
         </div>
     </div>
 @endsection
 
 @section('sidebar-right')
-    @@parent
+    @parent
     <div class="block-xoso">
         <h2 class="xoso-title">TIN MỚI NHẤT</h2>
         <ul class="list-group">
+            @foreach ($tin_moi as $tin)
             <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li> <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li> <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li> <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li> <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li> <li class="list-group-item">
-                <img src="..." alt="" class="rounded float-left" width="60px" height="60px">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </li>
+                <a href="{{route('xem-tin', $tin->id_tin)}}">
+                    <img src="{{$tin->link_hinh_anh}}" alt="" class="rounded float-left" width="60px" height="60px">
+                </a>
+                <p>{{$tin->tin_tieu_de}}</p>
+                </li>
+            @endforeach
         </ul>
     </div>
 
