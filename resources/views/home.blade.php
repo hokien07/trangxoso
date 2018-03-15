@@ -175,18 +175,19 @@
                 </tbody>
             </table>
             <div class="control-panel">
-                <form action="">
-                    <label class="radio" data-value="0">
+                <form id="form-show-number-mien-bac">
+                    <input type="hidden" value="">
+                    <label class="radio" data-value="0">đầy đủ</label>
                         <input type="radio" name="show-digits" value="0">
-                    </label>
                     
-                    <label class="radio" data-value="2">
+                    
+                    <label class="radio" data-value="2">2 số</label>
                         <input type="radio" name="show-digits" value="2">
-                    </label>
+                    
 
-                    <label class="radio" data-value="3">
+                    <label class="radio" data-value="3">3 số</label>
                         <input type="radio" name="show-digits" value="3">
-                    </label>
+                    
                 </form>
             </div>
         </div>
@@ -195,7 +196,7 @@
         <div class="box">
             <h2 class="title-box">xổ số miền nam ngày: {{ date("d-m-Y", strtotime($mien_nam_first->ngay_mo_thuong))}}</h2>
             
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered" id="table-kiet-qua-mien-bac">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -318,6 +319,22 @@
                 </tr>
                 </tbody>
             </table>
+
+            <div class="control-panel">
+                <form id="form-show-number-mien-nam">
+                    <label class="radio" data-value="0">đầy đủ</label>
+                        <input type="radio" name="show-digits" value="0">
+                    
+                    
+                    <label class="radio" data-value="2">2 số</label>
+                        <input type="radio" name="show-digits" value="2">
+                    
+
+                    <label class="radio" data-value="3">3 số</label>
+                        <input type="radio" name="show-digits" value="3">
+                    
+                </form>
+            </div>
         </div>
 
 
@@ -446,6 +463,21 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div class="control-panel">
+                        <form id="form-show-number-mien-trung">
+                            <label class="radio" data-value="0">đầy đủ</label>
+                                <input type="radio" name="show-digits" value="0">
+                            
+                            
+                            <label class="radio" data-value="2">2 số</label>
+                                <input type="radio" name="show-digits" value="2">
+                            
+        
+                            <label class="radio" data-value="3">3 số</label>
+                                <input type="radio" name="show-digits" value="3">
+                            
+                        </form>
+                    </div>
         </div>
     </div>
 @endsection
