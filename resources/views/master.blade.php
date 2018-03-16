@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('plugin/css/fontawesome-all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('plugin/css/sb-admin-2.min.css')}}">
+
     <title>@yield('title')</title>
 </head>
 <body>
@@ -141,6 +143,6 @@
 
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('plugin/js/fontawesome-all.min.js')}}"></script>
-
+<script src="{{asset('plugin/js/sb-admin-2.min.js')}}"></script>
 </body>
 </html>

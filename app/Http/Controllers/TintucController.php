@@ -15,6 +15,17 @@ use App\Classes\Crawller;
 
 class TintucController extends Controller
 {
+
+    public function xoa_tin($id) {
+        echo $id; exit();
+    } 
+
+    public function sua_tin($id) {
+        $tin = DB::table('tin_tuc')->select('*')->where('id_tin','=', $id)->first();
+        
+        return view('sua-tin', compact('tin'));
+    }
+
     public function get_tin_tuc() {
         $get_tin = new getdata();
 

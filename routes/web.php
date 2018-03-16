@@ -20,6 +20,8 @@ Route::get('/', 'GetdataController@index');
 Route::get('{id}/{vung}/ket-qua', ['as'=>'ket-qua', 'uses'=>'SingleController@get_ket_qua_tung_tinh']);
 Route::get('{id}/xem-tin', ['as'=>'xem-tin', 'uses'=>'TintucController@xem_tin']);
 Route::get('/tin-tuc', 'TintucController@get_all_tin_tuc');
+Route::post('{id}/xoa-tin', 'TintucController@xoa_tin')->name('xoa-tin');
+Route::get('{id}/sua-tin', 'TintucController@sua_tin')->name('sua-tin');
 /*--------------------------------------------------------*/
 /*---------------Crawller data-----------------------------*/
 /*--------------------------------------------------------*/
@@ -39,6 +41,21 @@ Route::get('lay-ket-qua-dien-toan', 'KetquadientoanController@dien_toan');
 Route::get('lay-tinh-mo-thuong', 'TinhmothuongController@get_tinh_mo_thuong');
 
 
+
+
+
+/*---------------------------------------------------------*/
+/*-----------------------Admin Controller------------*/
+/*---------------------------------------------------------*/
+
+Route::get('/login', 'AdminController@login')->name('login');
+Route::get('/dang-ky', 'AdminController@get_dang_ky')->name('dang-ky');
+
+Route::post('dang-nhap', 'AdminController@post_dang_nhap')->name('dang-nhap');
+Route::post('/dang-ky','AdminController@post_dang_ky')->name('dang-ky');
+
+
+
 /*---------------------------------------------------------*/
 /*-----------------------Check connect database------------*/
 /*---------------------------------------------------------*/
@@ -55,4 +72,6 @@ Route::get('connect', function () {
         }
     }
 });
+
+
 

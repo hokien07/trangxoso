@@ -10222,3 +10222,7 @@ li {
           text-decoration: solid;
 }
 
+.table {
+  text-align: left !important;
+}
+
