@@ -128,7 +128,7 @@ class TintucController extends Controller
         $tins = DB::table('tin_tuc')
         ->select('*')
         ->orderBy('id_tin', 'ASC')
-        ->paginate(5);  
+        ->paginate(10);  
         
         return view('tin-tuc', compact('tins', 'ten_tinhs', 'ngay', 'tin_moi' ));
     }

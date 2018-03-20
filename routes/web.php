@@ -74,4 +74,10 @@ Route::get('connect', function () {
 });
 
 
+<<<<<<< HEAD
 
+=======
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+>>>>>>> 60bda67c18c68374bc14b11678fca287cac797f9
